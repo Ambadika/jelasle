@@ -3,6 +3,7 @@
         android:label="flutter_app_test"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

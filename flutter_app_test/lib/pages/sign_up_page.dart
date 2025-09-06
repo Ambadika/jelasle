@@ -1,38 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
+
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? account = await googleSignIn.signIn();
+
+      if (account != null) {
+        // Kalau user berhasil pilih akun Google
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Login sebagai ${account.displayName}")),
+        );
+      } else {
+        // Kalau user batalin
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Login dibatalkan")));
+      }
+    } catch (e) {
+      // Kalau error
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Terjadi error: $e")));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: const Color(0xFFFFFFFF),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset('assets/images/lojo.png', width: 163, height: 163),
-              SizedBox(height: 15),
-              Text(
+              const SizedBox(height: 15),
+              const Text(
                 'Sign Up',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              SizedBox(height: 33),
+              const SizedBox(height: 33),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => _signInWithGoogle(context),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF07BEB8),
+                    backgroundColor: const Color(0xFF07BEB8),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 19, vertical: 19),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 19,
+                      vertical: 19,
+                    ),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.login),
@@ -49,7 +77,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 27),
+              const SizedBox(height: 27),
               Row(
                 children: [
                   Expanded(
@@ -59,12 +87,12 @@ class LoginPage extends StatelessWidget {
                       endIndent: 10,
                     ),
                   ),
-                  SizedBox(width: 22),
-                  Text(
+                  const SizedBox(width: 22),
+                  const Text(
                     'Or',
                     style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
-                  SizedBox(width: 22),
+                  const SizedBox(width: 22),
                   Expanded(
                     child: Divider(
                       thickness: 1,
@@ -74,24 +102,27 @@ class LoginPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 27),
+              const SizedBox(height: 27),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFFFFF),
-                    foregroundColor: Color(0xFF07BEB8),
+                    backgroundColor: const Color(0xFFFFFFFF),
+                    foregroundColor: const Color(0xFF07BEB8),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Color(0xFF07BEB8), // Warna border
                         width: 2,
                       ),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 19, vertical: 19),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 19,
+                      vertical: 19,
+                    ),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.login),

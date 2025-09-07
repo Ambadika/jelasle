@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_test/pages/otp_page.dart';
+import 'package:flutter_app_test/pages/sign_up_hp_page.dart';
 import 'package:flutter_app_test/pages/sign_up_page.dart';
 
 void main() {
@@ -13,7 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: SignUpPage(),
+      initialRoute: '/signUp', // halaman pertama kali dibuka
+      routes: {
+        '/signUp': (context) => const SignUpPage(),
+        '/signUpHp': (context) => const SignUpPageHp(),
+        '/otp': (context) => const OtpPage(),
+      },
     );
   }
 }

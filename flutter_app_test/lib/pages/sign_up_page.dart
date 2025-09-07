@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'sign_in_page.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -13,6 +14,12 @@ class SignUpPage extends StatelessWidget {
         // Kalau user berhasil pilih akun Google
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Login sebagai ${account.displayName}")),
+        );
+
+        // Masuk ke halaman Sign In
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const SignInPage()),
         );
       } else {
         // Kalau user batalin
@@ -83,7 +90,7 @@ class SignUpPage extends StatelessWidget {
                   Expanded(
                     child: Divider(
                       thickness: 1,
-                      color: Colors.grey[300],
+                      color: Colors.grey,
                       endIndent: 10,
                     ),
                   ),
@@ -96,7 +103,7 @@ class SignUpPage extends StatelessWidget {
                   Expanded(
                     child: Divider(
                       thickness: 1,
-                      color: Colors.grey[300],
+                      color: Colors.grey,
                       indent: 10,
                     ),
                   ),
@@ -113,7 +120,7 @@ class SignUpPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                       side: const BorderSide(
-                        color: Color(0xFF07BEB8), // Warna border
+                        color: Color(0xFF07BEB8),
                         width: 2,
                       ),
                     ),

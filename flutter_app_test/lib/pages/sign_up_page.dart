@@ -11,8 +11,11 @@ class SignUpPage extends StatelessWidget {
       final GoogleSignInAccount? account = await googleSignIn.signIn();
 
       if (account != null) {
+        // Kalau user berhasil pilih akun Google
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Login sebagai ${account.displayName}")),
+          SnackBar(
+            content: Text("Login sebagai ${account.displayName ?? 'User'}"),
+          ),
         );
 
         // Masuk ke halaman Sign In
@@ -21,14 +24,17 @@ class SignUpPage extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const SignInPage()),
         );
       } else {
+        // Kalau user batalin
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(const SnackBar(content: Text("Login dibatalkan")));
       }
-    } catch (e) {
+    } catch (e, stack) {
+      // Kalau error
+      debugPrint("Google Sign-In error: $e\n$stack");
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text("Terjadi error: $e")));
+      ).showSnackBar(SnackBar(content: Text("Terjadi error: ${e.toString()}")));
     }
   }
 
@@ -38,57 +44,57 @@ class SignUpPage extends StatelessWidget {
       backgroundColor: const Color(0xFFFFFFFF),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, // bikin 2 section
-          children: [
-            // SECTION ATAS (logo + tombol)
-            Column(
-              children: [
-                Image.asset('assets/images/lojo.png', width: 163, height: 163),
-                const SizedBox(height: 15),
-                const Text(
-                  'Sign Up',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                const SizedBox(height: 33),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => _signInWithGoogle(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF07BEB8),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 19,
-                        vertical: 19,
-                      ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset('assets/images/lojo.png', width: 163, height: 163),
+              const SizedBox(height: 15),
+              const Text(
+                'Sign Up',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+              const SizedBox(height: 33),
+
+              // Tombol Google
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => _signInWithGoogle(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF07BEB8),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.login),
-                        SizedBox(width: 55),
-                        Text(
-                          'Sign Up With Google',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        SizedBox(width: 58),
-                      ],
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 19,
+                      vertical: 19,
                     ),
                   ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.login),
+                      SizedBox(width: 55),
+                      Text(
+                        'Sign Up With Google',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      SizedBox(width: 58),
+                    ],
+                  ),
                 ),
-<<<<<<< HEAD
               ),
               const SizedBox(height: 27),
+
+              // Divider OR
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Divider(
                       thickness: 1,
                       color: Colors.grey,
@@ -101,7 +107,7 @@ class SignUpPage extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 15),
                   ),
                   const SizedBox(width: 22),
-                  Expanded(
+                  const Expanded(
                     child: Divider(
                       thickness: 1,
                       color: Colors.grey,
@@ -111,10 +117,14 @@ class SignUpPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 27),
+
+              // Tombol Nomor HP
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // nanti diisi logika sign up pakai nomor HP
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFFFFFF),
                     foregroundColor: const Color(0xFF07BEB8),
@@ -123,95 +133,32 @@ class SignUpPage extends StatelessWidget {
                       side: const BorderSide(
                         color: Color(0xFF07BEB8),
                         width: 2,
-=======
-                const SizedBox(height: 27),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: Colors.grey[300],
-                        endIndent: 10,
->>>>>>> 552875835189c8d7ecd1fe9efab6e456fb819a64
                       ),
                     ),
-                    const SizedBox(width: 22),
-                    const Text(
-                      'Or',
-                      style: TextStyle(color: Colors.grey, fontSize: 15),
-                    ),
-                    const SizedBox(width: 22),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: Colors.grey[300],
-                        indent: 10,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 27),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/signUpHp');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFFFFF),
-                      foregroundColor: const Color(0xFF07BEB8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: const BorderSide(
-                          color: Color(0xFF07BEB8),
-                          width: 2,
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 19,
-                        vertical: 19,
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.login),
-                        SizedBox(width: 55),
-                        Text(
-                          'Sign Up With Number Hp',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        SizedBox(width: 58),
-                      ],
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 19,
+                      vertical: 19,
                     ),
                   ),
-                ),
-              ],
-            ),
-
-            // SECTION BAWAH (have account)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Have Account ? "),
-                GestureDetector(
-                  onTap: () {
-                    // navigasi ke SignInPage nanti
-                  },
-                  child: const Text(
-                    "Sign In",
-                    style: TextStyle(
-                      color: Color(0xFF07BEB8),
-                      fontWeight: FontWeight.w600,
-                    ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.login),
+                      SizedBox(width: 55),
+                      Text(
+                        'Sign Up With Number Hp',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      SizedBox(width: 58),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

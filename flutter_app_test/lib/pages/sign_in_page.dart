@@ -1,46 +1,8 @@
 import 'package:flutter/material.dart';
-import 'sign_in_page.dart'; // biar bisa navigasi ke SignInPage
+import 'sign_up_page.dart'; // biar bisa navigasi ke Sign Up
 
-class PasswordPage extends StatefulWidget {
-  const PasswordPage({super.key});
-
-  @override
-  State<PasswordPage> createState() => _PasswordPageState();
-}
-
-class _PasswordPageState extends State<PasswordPage> {
-  bool _obscurePassword = true;
-  bool _obscureConfirm = true;
-
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmController = TextEditingController();
-
-  void _validateAndContinue() {
-    String password = _passwordController.text.trim();
-    String confirm = _confirmController.text.trim();
-
-    if (password.isEmpty || confirm.isEmpty) {
-      _showSnackBar("Password tidak boleh kosong!");
-    } else if (password != confirm) {
-      _showSnackBar("Password dan konfirmasi tidak sama!");
-    } else {
-      // Kalau valid, navigasi ke SignInPage
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const SignInPage()),
-      );
-    }
-  }
-
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.redAccent,
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
+class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +14,8 @@ class _PasswordPageState extends State<PasswordPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Logo
-              Image.asset("assets/images/lojo.png", height: 100),
+              // Logo pakai asset
+              Image.asset("assets/images/lojo.png", height: 120),
               const SizedBox(height: 16),
 
               // Nama App
@@ -72,7 +34,7 @@ class _PasswordPageState extends State<PasswordPage> {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Password",
+                  "Sign In",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
@@ -82,26 +44,11 @@ class _PasswordPageState extends State<PasswordPage> {
               ),
               const SizedBox(height: 24),
 
-              // Input Password
+              // Input Email/No. HP
               TextField(
-                controller: _passwordController,
-                obscureText: _obscurePassword,
                 decoration: InputDecoration(
-                  hintText: "Masukkan Password",
-                  prefixIcon: const Icon(Icons.lock, color: Colors.teal),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
-                    },
-                  ),
+                  hintText: "No. Handphone / Email",
+                  prefixIcon: const Icon(Icons.person, color: Colors.teal),
                   filled: true,
                   fillColor: Colors.cyanAccent.shade100,
                   border: OutlineInputBorder(
@@ -112,24 +59,12 @@ class _PasswordPageState extends State<PasswordPage> {
               ),
               const SizedBox(height: 16),
 
-              // Konfirmasi Password
+              // Input Password
               TextField(
-                controller: _confirmController,
-                obscureText: _obscureConfirm,
+                obscureText: true,
                 decoration: InputDecoration(
-                  hintText: "Konfirmasi Password",
+                  hintText: "Password",
                   prefixIcon: const Icon(Icons.lock, color: Colors.teal),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureConfirm ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureConfirm = !_obscureConfirm;
-                      });
-                    },
-                  ),
                   filled: true,
                   fillColor: Colors.cyanAccent.shade100,
                   border: OutlineInputBorder(
@@ -138,7 +73,20 @@ class _PasswordPageState extends State<PasswordPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
+
+              // Remember Me
+              Row(
+                children: [
+                  Checkbox(
+                    value: false,
+                    onChanged: (val) {},
+                    activeColor: Colors.teal,
+                  ),
+                  const Text("Remember Me"),
+                ],
+              ),
+              const SizedBox(height: 20),
 
               // Tombol Lanjutkan
               SizedBox(
@@ -151,7 +99,9 @@ class _PasswordPageState extends State<PasswordPage> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
-                  onPressed: _validateAndContinue,
+                  onPressed: () {
+                    // Aksi ketika tombol ditekan
+                  },
                   child: const Text(
                     "Lanjutkan",
                     style: TextStyle(
@@ -161,6 +111,32 @@ class _PasswordPageState extends State<PasswordPage> {
                     ),
                   ),
                 ),
+              ),
+              const SizedBox(height: 30),
+
+              // Sign Up
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account? "),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

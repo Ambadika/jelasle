@@ -45,10 +45,7 @@ class ProfilePage extends StatelessWidget {
                         SizedBox(height: 4),
                         Text(
                           "6 Pengikut | 0 Diikuti",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white70,
-                          ),
+                          style: TextStyle(fontSize: 14, color: Colors.white70),
                         ),
                       ],
                     ),
@@ -60,14 +57,20 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        color: Colors.white,
+                      ),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.favorite_border, color: Colors.white),
+                      icon: const Icon(
+                        Icons.favorite_border,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -75,30 +78,30 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 20),
 
           // Kotak menu
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 54),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.cyan[50],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: ListView(
-                  children: [
-                    _buildMenuItem(Icons.person, "Edit Profil", onTap: () {}),
-                    _buildMenuItem(Icons.lock, "Edit Password", onTap: () {}),
-                    _buildMenuItem(Icons.info, "Info Aplikasi", onTap: () {}),
-                    _buildMenuItem(Icons.help_outline, "Bantuan", onTap: () {}),
-                    const Divider(),
-                    _buildMenuItem(
-                      Icons.logout,
-                      "Log Out",
-                      color: Colors.red,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 54),
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: Colors.cyan[50],
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                mainAxisSize:
+                    MainAxisSize.min, // ⬅️ biar kotak hanya setinggi konten
+                children: [
+                  _buildMenuItem(Icons.person, "Edit Profil", onTap: () {}),
+                  _buildMenuItem(Icons.lock, "Edit Password", onTap: () {}),
+                  _buildMenuItem(Icons.info, "Info Aplikasi", onTap: () {}),
+                  _buildMenuItem(Icons.help_outline, "Bantuan", onTap: () {}),
+                  const Divider(),
+                  _buildMenuItem(
+                    Icons.logout,
+                    "Log Out",
+                    color: Colors.red,
+                    onTap: () {},
+                  ),
+                ],
               ),
             ),
           ),

@@ -7,83 +7,107 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.cyan,
-        title: const Text("Saya", style: TextStyle(color: Colors.white)),
-        centerTitle: true,
-        actions: [
-          // ikon keranjang
-          IconButton(
-            onPressed: () {
-              // Arahkan ke halaman keranjang
-            },
-            icon: const Icon(Icons.shopping_cart, color: Colors.white),
-          ),
-        ],
-      ),
+
       body: Column(
         children: [
-          // Header Profil
+          // Bagian Header
           Container(
             padding: const EdgeInsets.all(16),
-            color: Colors.cyan,
+            decoration: const BoxDecoration(
+              color: Colors.cyan,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Foto profil
-                const CircleAvatar(
-                  radius: 35,
-                  backgroundImage: AssetImage(
-                    "assets/profile.png",
-                  ), // ganti assetmu
-                ),
-                const SizedBox(width: 16),
-                // Info nama & followers
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "drak sistem",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                // Avatar + Nama
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage("assets/profile.png"),
                     ),
-                    SizedBox(height: 4),
-                    Text(
-                      "6 Pengikut | 0 Diikuti",
-                      style: TextStyle(fontSize: 14, color: Colors.white70),
+                    const SizedBox(width: 12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Rasya Ganteng",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          "6 Pengikut | 0 Diikuti",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
+
+                // Icon keranjang + wishlist
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.favorite_border, color: Colors.white),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
 
           const SizedBox(height: 20),
 
-          // List menu
+          // Kotak menu
           Expanded(
-            child: ListView(
-              children: [
-                _buildMenuItem(Icons.person, "Edit Profil", onTap: () {}),
-                _buildMenuItem(Icons.lock, "Edit Password", onTap: () {}),
-                _buildMenuItem(Icons.info, "Info Aplikasi", onTap: () {}),
-                _buildMenuItem(Icons.help_outline, "Bantuan", onTap: () {}),
-                _buildMenuItem(
-                  Icons.logout,
-                  "Log Out",
-                  color: Colors.red,
-                  onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 54),
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.cyan[50],
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ],
+                child: ListView(
+                  children: [
+                    _buildMenuItem(Icons.person, "Edit Profil", onTap: () {}),
+                    _buildMenuItem(Icons.lock, "Edit Password", onTap: () {}),
+                    _buildMenuItem(Icons.info, "Info Aplikasi", onTap: () {}),
+                    _buildMenuItem(Icons.help_outline, "Bantuan", onTap: () {}),
+                    const Divider(),
+                    _buildMenuItem(
+                      Icons.logout,
+                      "Log Out",
+                      color: Colors.red,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],
       ),
+
+      // Bottom Nav
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 2, // posisi "Saya"
+        currentIndex: 2,
         selectedItemColor: Colors.cyan,
         unselectedItemColor: Colors.grey,
         items: const [
@@ -108,7 +132,11 @@ class ProfilePage extends StatelessWidget {
       leading: Icon(icon, color: color ?? Colors.black87),
       title: Text(
         title,
-        style: TextStyle(color: color ?? Colors.black87, fontSize: 16),
+        style: TextStyle(
+          color: color ?? Colors.black87,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,

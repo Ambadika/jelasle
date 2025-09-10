@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_test/pages/home_page.dart';
 import 'package:flutter_app_test/pages/otp_page.dart';
 import 'package:flutter_app_test/profile/profil_page.dart';
 import 'package:flutter_app_test/pages/sign_up_hp_page.dart';
@@ -16,14 +17,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      initialRoute: '/editprofile', // halaman pertama kali dibuka
+      title: 'flutter demo',
+      initialRoute: '/home', // halaman pertama kali dibuka
       routes: {
         '/signUp': (context) => const SignUpPage(),
         '/signUpHp': (context) => const SignUpPageHp(),
         '/otp': (context) => const OtpPage(),
         '/profile': (context) => const ProfilePage(),
         '/editprofile': (context) => const EditProfilePage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }

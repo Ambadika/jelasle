@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      initialRoute: '/profile', // halaman pertama kali dibuka
+      initialRoute: '/editprofile', // halaman pertama kali dibuka
       routes: {
         '/signUp': (context) => const SignUpPage(),
         '/signUpHp': (context) => const SignUpPageHp(),
